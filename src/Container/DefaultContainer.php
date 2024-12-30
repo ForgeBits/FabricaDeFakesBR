@@ -16,6 +16,10 @@ class DefaultContainer
             return new \ForgeBits\FabricaDeFakes\Generators\Date\CarbonDate();
         });
 
+        $container->set('randomDigitGenerator', function () use ($container) {
+            return new \ForgeBits\FabricaDeFakes\Generators\Numbers\RandomDigit\RandomDigit();
+        });
+
         return $container;
     }
 
