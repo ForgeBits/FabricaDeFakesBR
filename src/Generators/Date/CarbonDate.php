@@ -6,6 +6,32 @@ use Carbon\Carbon;
 
 class CarbonDate implements DateGeneratorInterface
 {
+    /**
+     * Gera uma data com base nos parâmetros informados.
+     *
+     * Este metodo verifica se a data já foi gerada anteriormente. Caso contrário, uma nova data é gerada.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $date = $faker->date(
+     *       date: '2021-01-01 00:00:04',
+     *       addDays: 1,
+     *       addHours: 2,
+     *       addMinutes: 3,
+     *       addSeconds: 4,
+     *    );
+     *
+     * @param string|null $date Data base para a geração da nova data.
+     * @param string|null $timezone Fuso horário da data gerada.
+     * @param int|null $addDays Quantidade de dias a serem adicionados à data.
+     * @param int|null $addHours Quantidade de horas a serem adicionadas à data.
+     * @param int|null $addMinutes Quantidade de minutos a serem adicionados à data.
+     * @param int|null $addSeconds Quantidade de segundos a serem adicionados à data.
+     * @param bool|null $withHours Indica se a data gerada deve conter as horas.
+     *
+     * @return string A data gerada ou previamente armazenada.
+     *
+     */
     public function generateDate(
         ?string $date = null,
         ?string $timezone = 'GMT-3',

@@ -8,7 +8,8 @@ use Psr\Container\ContainerInterface;
 /**
  * @property string uuid
  * @property string date
- * @property int randomDigit
+ * @property int randomNumber
+ * @property int randomNumberExcept
  */
 class FakerBase
 {
@@ -125,12 +126,86 @@ class FakerBase
      *
      * @return int O número gerado ou previamente armazenado.
      */
-    public function randomDigit(?int $min = 0, ?int $max = PHP_INT_MAX): int
+    public function randomInteger(?int $min = 0, ?int $max = PHP_INT_MAX): int
     {
-        if (empty($this->data['randomDigit'])) {
-            $this->data['randomDigit'] = $this->c->get('randomDigitGenerator')->randomDigit($min, $max);
+        if (empty($this->data['randomInteger'])) {
+            $this->data['randomInteger'] = $this->c->get('randomNumberGenerator')->randomInteger($min, $max);
         }
 
-        return $this->data['randomDigit'];
+        return $this->data['randomInteger'];
+    }
+
+    /**
+     * Gera um número aleatório entre os valores informados, exceto os valores informados no array $except.
+     *
+     * Este metodo verifica se o número já foi gerado anteriormente. Caso contrário, um novo número é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomDigit = $faker->randomDigitExcept([1,2,3,4,5], 1, 10);
+     * </code>
+     *
+     * @param array $except Valores que não podem ser gerados.
+     * @param int|null $min Valor mínimo do número gerado.
+     * @param int|null $max Valor máximo do número gerado.
+     *
+     * @return int O número gerado ou previamente armazenado.
+     */
+    public function randomIntegerExcept(array $except, ?int $min = 0, ?int $max = PHP_INT_MAX): int
+    {
+        if (empty($this->data['randomIntegerExcept'])) {
+            $this->data['randomIntegerExcept'] = $this->c->get('randomNumberGenerator')->randomIntegerExcept($except, $min, $max);
+        }
+
+        return $this->data['randomIntegerExcept'];
+    }
+
+    /**
+     * Gera um número do tipo float aleatório entre os valores informados.
+     *
+     * Este metodo verifica se o número já foi gerado anteriormente. Caso contrário, um novo número é gerado.
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomFloat = $faker->randomFloat(1.0, 10.0);
+     * </code>
+     *
+     * @param float|null $min Valor mínimo do número gerado.
+     * @param float|null $max Valor máximo do número gerado.
+     *
+     * @return float O número gerado ou previamente armazenado.
+     *
+     */
+    public function randomFloat(?float $min = 0.0, ?float $max = PHP_FLOAT_MAX): float
+    {
+        if (empty($this->data['randomFloat'])) {
+            $this->data['randomFloat'] = $this->c->get('randomNumberGenerator')->randomFloat($min, $max);
+        }
+
+        return $this->data['randomFloat'];
+    }
+
+    /**
+     * Gera um número do tipo float aleatório entre os valores informados, exceto os valores informados no array $except.
+     *
+     * Este metodo verifica se o número já foi gerado anteriormente. Caso contrário, um novo número é gerado.
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomFloat = $faker->randomFloatExcept([1.0, 2.0, 3.0, 4.0, 5.0], 1.0, 10.0);
+     * </code>
+     *
+     * @param array $except Valores que não podem ser gerados.
+     * @param float|null $min Valor mínimo do número gerado.
+     * @param float|null $max Valor máximo do número gerado.
+     *
+     * @return float O número gerado ou previamente armazenado.
+     *
+     */
+    public function randomFloatExcept(array $except, ?float $min = 0.0, ?float $max = PHP_FLOAT_MAX): float
+    {
+        if (empty($this->data['randomFloatExcept'])) {
+            $this->data['randomFloatExcept'] = $this->c->get('randomNumberGenerator')->randomFloatExcept($except, $min, $max);
+        }
+
+        return $this->data['randomFloatExcept'];
     }
 }
