@@ -115,6 +115,8 @@ class RandomNumber implements RandomNumberInterface
      */
     private function generateFloatNumber(?float $min, ?float $max): float
     {
-        return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+        $number = $min + mt_rand() / mt_getrandmax() * ($max - $min);
+
+        return (float) number_format($number, 2, '.', '');
     }
 }

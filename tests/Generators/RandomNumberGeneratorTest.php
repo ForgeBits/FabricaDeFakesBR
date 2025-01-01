@@ -71,7 +71,7 @@ class RandomNumberGeneratorTest extends TestCase
     public function testIfGeneratedRandomFloatHasNotExceptNumbers()
     {
         $except = [1.0, 2.0, 3.0, 4.0, 5.0];
-        $randomFloat = $this->generator->randomFloatExcept($except);
+        $randomFloat = $this->generator->randomFloatExcept($except, 1.0, 10.0);
 
         $this->assertNotContains($randomFloat, $except);
     }
