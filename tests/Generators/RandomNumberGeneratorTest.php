@@ -5,6 +5,7 @@ namespace ForgeBits\FabricaDeFakes\Tests\Generators;
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomNumbers\RandomNumberInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 class RandomNumberGeneratorTest extends TestCase
@@ -12,11 +13,11 @@ class RandomNumberGeneratorTest extends TestCase
     private RandomNumberInterface $generator;
 
     /**
-     * @throws NotFoundExceptionInterface
+     * @throws NotFoundExceptionInterface|ContainerExceptionInterface
      */
     public function __construct(string $name)
     {
-        $this->generator = DefaultContainer::createDefaultContainer()->get('randomNumberGenerator');
+        $this->generator = DefaultContainer::createContainer()->get('randomNumberGenerator');
 
         parent::__construct($name);
     }

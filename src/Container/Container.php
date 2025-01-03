@@ -10,9 +10,15 @@ class Container implements ContainerInterface
 {
     private array $services = [];
 
-    public function set(string $id, $service): void
+    public function set(string $id, callable $service, ?string $implements = null): self
     {
+        if ($implements && !is_a($service(), $implements)) {
+            throw new \TypeError("Service does not implement $implements");
+        }
+
         $this->services[$id] = $service;
+
+        return $this;
     }
 
     /**

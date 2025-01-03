@@ -3,14 +3,9 @@
 namespace ForgeBits\FabricaDeFakes\Core;
 
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
+use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\Formatters\FormatterLetterInterface;
 use Psr\Container\ContainerInterface;
 
-/**
- * @property string uuid
- * @property string date
- * @property int randomNumber
- * @property int randomNumberExcept
- */
 class FakerBase
 {
     protected ?ContainerInterface $c;
@@ -18,7 +13,7 @@ class FakerBase
 
     public function __construct()
     {
-        $this->c = DefaultContainer::createDefaultContainer();
+        $this->c = DefaultContainer::createContainer();
     }
 
     public function __call(string $name, array $arguments)
@@ -258,5 +253,83 @@ class FakerBase
         }
 
         return $this->data['randomManyFloatNumbers'];
+    }
+
+    /**
+     * Gera uma letra aleatória.
+     *
+     * Este metodo verifica se a letra já foi gerada anteriormente. Caso contrário, uma nova letra é gerada.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomLetter = $faker->randomLetter(except: ['C'], upperCase: true);
+     * </code>
+     *
+     * @param array|null $except Letras que não podem ser geradas.
+     * @param bool|null $upperCase Indica se a letra gerada deve ser maiúscula.
+     *
+     * @return string A letra gerada ou previamente armazenada.
+     */
+    public function randomLetter(?array $except = [], ?bool $upperCase = false): string
+    {
+        if (empty($this->data['randomLetter'])) {
+            $this->data['randomLetter'] = $this->c->get('randomLetterGenerator')->randomLetter($except, $upperCase);
+        }
+
+        return $this->data['randomLetter'];
+    }
+
+    /**
+     * Gera um array com letras aleatórias.
+     *
+     * Este metodo verifica se o array de letras já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
+     * <code>
+     *      $faker = new FakerBase();
+     *      $randomLetters = $faker->randomLetters(formatterLetters: new ArrayFormatter(), items: 25, except: ['C'], upperCase: true);
+     * </code>
+     *
+     * @param FormatterLetterInterface $formatterLetters
+     * @param int $items Quantidade de letras a serem geradas.
+     * @param array|null $except Letras que não podem ser geradas.
+     * @param bool|null $upperCase Se as letras geradas devem ser maiúsculas.
+     *
+     * @return array|string Um array ou string com as letras geradas no formato informado.
+     */
+    public function randomLetters(FormatterLetterInterface $formatterLetters, int $items = 10, ?array $except = [], ?bool $upperCase = false): array|string
+    {
+        if (empty($this->data['randomLetters'])) {
+            $this->data['randomLetters'] = $this->c->get('randomLetterGenerator')->randomLetters($formatterLetters, $items, $except, $upperCase);
+        }
+
+        return $this->data['randomLetters'];
+    }
+
+    /**
+     * Gera um array com letras aleatórias entre os valores informados.
+     *
+     * Este metodo verifica se o array de letras já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomLetters = $faker->randomLettersBetween(formatterLetters: new ArrayFormatter(), start: 'A', end: 'Z', items: 25, except: ['C'], upperCase: true);
+     * </code>
+     *
+     * @param FormatterLetterInterface $formatterLetters
+     * @param string $start Letra inicial do intervalo.
+     * @param string $end Letra final do intervalo.
+     * @param int $items Quantidade de letras a serem geradas.
+     * @param array|null $except Letras que não podem ser geradas.
+     * @param bool|null $upperCase Se as letras geradas devem ser maiúsculas.
+     *
+     * @return array|string Um array ou string com as letras geradas no formato informado.
+     */
+    public function randomLettersBetween(FormatterLetterInterface $formatterLetters, string $start, string $end, int $items, ?array $except = [], ?bool $upperCase = false): array|string
+    {
+        if (empty($this->data['randomLettersBetween'])) {
+            $this->data['randomLettersBetween'] = $this->c->get('randomLetterGenerator')->randomLettersBetween($formatterLetters, $start, $end, $items, $except, $upperCase);
+        }
+
+        return $this->data['randomLettersBetween'];
     }
 }

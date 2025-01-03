@@ -5,6 +5,7 @@ namespace ForgeBits\FabricaDeFakes\Tests\Generators;
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
 use ForgeBits\FabricaDeFakes\Generators\Date\DateGeneratorInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 class DateGeneratorTest extends TestCase
@@ -12,11 +13,11 @@ class DateGeneratorTest extends TestCase
     private DateGeneratorInterface $generator;
 
     /**
-     * @throws NotFoundExceptionInterface
+     * @throws NotFoundExceptionInterface|ContainerExceptionInterface
      */
     public function __construct(string $name)
     {
-        $this->generator = DefaultContainer::createDefaultContainer()->get('dateGenerator');
+        $this->generator = DefaultContainer::createContainer()->get('dateGenerator');
 
         parent::__construct($name);
     }
