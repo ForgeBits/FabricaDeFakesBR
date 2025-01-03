@@ -20,6 +20,10 @@ class DefaultContainer
             return new \ForgeBits\FabricaDeFakes\Generators\Numbers\RandomNumbers\RandomNumber();
         });
 
+        $container->set('randomManyNumbersGenerator', function () use ($container) {
+            return new \ForgeBits\FabricaDeFakes\Generators\Numbers\RandomManyNumbers\RandomManyNumbers();
+        });
+
         return $container;
     }
 

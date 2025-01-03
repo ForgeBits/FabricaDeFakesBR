@@ -9,6 +9,4 @@ interface RandomNumberInterface
     public function randomIntegerExcept(array $except, ?int $min = 0, ?int $max = PHP_INT_MAX): int;
 
     public function randomFloat(?float $min = 0.0, ?float $max = PHP_FLOAT_MAX): float;
-
-    public function randomFloatExcept(array $except, ?float $min = 0.0, ?float $max = PHP_FLOAT_MAX): float;
 }

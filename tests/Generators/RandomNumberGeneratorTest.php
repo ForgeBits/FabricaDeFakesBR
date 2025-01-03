@@ -68,11 +68,32 @@ class RandomNumberGeneratorTest extends TestCase
         $this->assertLessThanOrEqual($max, $randomFloat);
     }
 
-    public function testIfGeneratedRandomFloatHasNotExceptNumbers()
+    public function testIfRandomIntegerExceptReturnsExceptionWhenExceptParameterIsEmpty()
     {
-        $except = [1.0, 2.0, 3.0, 4.0, 5.0];
-        $randomFloat = $this->generator->randomFloatExcept($except, 1.0, 10.0);
+        $except = [];
 
-        $this->assertNotContains($randomFloat, $except);
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->generator->randomIntegerExcept($except);
+    }
+
+    public function testIfRandomIntegerMinNumberIsGreaterThanMaxNumberAndReturnException()
+    {
+        $min = 10;
+        $max = 5;
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->generator->randomInteger($min, $max);
+    }
+
+    public function testIfRandomFloatMinNumberIsGreaterThanMaxNumberAndReturnException()
+    {
+        $min = 10.0;
+        $max = 5.0;
+
+        $this->expectException(\InvalidArgumentException::class);
+
+        $this->generator->randomFloat($min, $max);
     }
 }

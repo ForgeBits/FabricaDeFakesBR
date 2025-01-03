@@ -185,27 +185,78 @@ class FakerBase
     }
 
     /**
-     * Gera um número do tipo float aleatório entre os valores informados, exceto os valores informados no array $except.
+     * Gera um array com números inteiros aleatórios entre os valores informados.
      *
-     * Este metodo verifica se o número já foi gerado anteriormente. Caso contrário, um novo número é gerado.
+     * Este metodo verifica se o array de números já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
      * <code>
      *     $faker = new FakerBase();
-     *     $randomFloat = $faker->randomFloatExcept([1.0, 2.0, 3.0, 4.0, 5.0], 1.0, 10.0);
+     *     $randomInteger = $faker->randomManyIntegerNumbers(10, 1, 10);
+     * </code>
+     *
+     * @param int $items Quantidade de números a serem gerados.
+     * @param int|null $min Valor mínimo do número gerado.
+     * @param int|null $max Valor máximo do número gerado.
+     *
+     * @return array Um array com os números gerados.
+     */
+    public function randomManyIntegerNumbers(int $items = 10, ?int $min = 0, ?int $max = PHP_INT_MAX): array
+    {
+        if (empty($this->data['randomManyIntegerNumbers'])) {
+            $this->data['randomManyIntegerNumbers'] = $this->c->get('randomManyNumbersGenerator')->randomManyIntegerNumbers($items, $min, $max);
+        }
+
+        return $this->data['randomManyIntegerNumbers'];
+    }
+
+    /**
+     * Gera um array com números inteiros aleatórios entre os valores informados, exceto os valores informados no array $except.
+     *
+     * Este metodo verifica se o array de números já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomInteger = $faker->randomManyIntegerNumbersExcept([1,2,3,4,5], 10, 1, 10);
      * </code>
      *
      * @param array $except Valores que não podem ser gerados.
+     * @param int $items Quantidade de números a serem gerados.
+     * @param int|null $min Valor mínimo do número gerado.
+     * @param int|null $max Valor máximo do número gerado.
+     *
+     * @return array Um array com os números gerados.
+     */
+    public function randomManyIntegerNumbersExcept(array $except, int $items, ?int $min = 0, ?int $max = PHP_INT_MAX): array
+    {
+        if (empty($this->data['randomManyIntegerNumbersExcept'])) {
+            $this->data['randomManyIntegerNumbersExcept'] = $this->c->get('randomManyNumbersGenerator')->randomManyIntegerNumbersExcept($except, $items, $min, $max);
+        }
+
+        return $this->data['randomManyIntegerNumbersExcept'];
+    }
+
+    /**
+     * Gera um array com números do tipo float aleatórios entre os valores informados.
+     *
+     * Este metodo verifica se o array de números já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomFloat = $faker->randomManyFloatNumbers(10, 1.0, 10.0);
+     * </code>
+     *
+     * @param int $items Quantidade de números a serem gerados.
      * @param float|null $min Valor mínimo do número gerado.
      * @param float|null $max Valor máximo do número gerado.
      *
-     * @return float O número gerado ou previamente armazenado.
-     *
+     * @return array Um array com os números gerados.
      */
-    public function randomFloatExcept(array $except, ?float $min = 0.0, ?float $max = PHP_FLOAT_MAX): float
+    public function randomManyFloatNumbers(int $items = 10, ?float $min = 0.0, ?float $max = PHP_FLOAT_MAX): array
     {
-        if (empty($this->data['randomFloatExcept'])) {
-            $this->data['randomFloatExcept'] = $this->c->get('randomNumberGenerator')->randomFloatExcept($except, $min, $max);
+        if (empty($this->data['randomManyFloatNumbers'])) {
+            $this->data['randomManyFloatNumbers'] = $this->c->get('randomManyNumbersGenerator')->randomManyFloatNumbers($items, $min, $max);
         }
 
-        return $this->data['randomFloatExcept'];
+        return $this->data['randomManyFloatNumbers'];
     }
 }
