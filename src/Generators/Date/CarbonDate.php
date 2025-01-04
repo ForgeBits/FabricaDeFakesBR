@@ -9,8 +9,6 @@ class CarbonDate implements DateGeneratorInterface
     /**
      * Gera uma data com base nos parâmetros informados.
      *
-     * Este metodo verifica se a data já foi gerada anteriormente. Caso contrário, uma nova data é gerada.
-     *
      * <code>
      *     $faker = new FakerBase();
      *     $date = $faker->date(

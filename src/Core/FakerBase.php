@@ -332,4 +332,99 @@ class FakerBase
 
         return $this->data['randomLettersBetween'];
     }
+
+    /**
+     * Gera um nome aleatorio podendo ser passado o genero e a quantidade de sobrenomes
+     *
+     *  Este metodo verifica se o array de letras já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomName = $faker->randomName('male', 2)
+     * </code>
+     *
+     * @param string|null $gender
+     * @param int|null $surnames
+     *
+     * @return string
+     */
+    public function randomName(?string $gender = null, ?int $surnames = 0): string {
+        if (empty($this->data['randomName'])) {
+            $this->data['randomName'] = $this->c->get('randomNameGenerator')->randomName($gender, $surnames);
+        }
+
+        return $this->data['randomName'];
+    }
+
+    /**
+     * Gera um nome masculino aleatorio podendo ser passado a quantidade de sobrenomes
+     *
+     * Este metodo verifica se o array de letras já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomName = $faker->randomName(2)
+     * </code>
+     *
+     * @param int|null $surnames
+     *
+     * @return string
+     */
+    public function randomMaleName(?int $surnames = 0): string
+    {
+        if (empty($this->data['randomMaleName'])) {
+            $this->data['randomMaleName'] = $this->c->get('randomNameGenerator')->randomMaleName($surnames);
+        }
+
+        return $this->data['randomMaleName'];
+    }
+
+    /**
+     * Gera um nome feminino aleatorio podendo ser passado a quantidade de sobrenomes
+     *
+     * Este metodo verifica se o array de letras já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomName = $faker->randomName(2)
+     * </code>
+     *
+     * @param int|null $surnames
+     *
+     * @return string
+     */
+    public function randomFemaleName(?int $surnames = 0): string
+    {
+        if (empty($this->data['randomFemaleName'])) {
+            $this->data['randomFemaleName'] = $this->c->get('randomNameGenerator')->randomFemaleName($surnames);
+        }
+
+        return $this->data['randomFemaleName'];
+    }
+
+    /**
+     * Gera um sobrenome aleatorio
+     *
+     * Este metodo verifica se o array de letras já foi gerado anteriormente. Caso contrário, um novo array é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $randomSurname = $faker->randomSurname(1)
+     * </code>
+     *
+     * @param int|null $surnames
+     *
+     * @return string
+     */
+    public function randomSurname(?int $surnames = 1): string
+    {
+        if ($surnames < 1) {
+            throw new \InvalidArgumentException('The number of surnames must be greater than 0.');
+        }
+
+        if (empty($this->data['randomSurname'])) {
+            $this->data['randomSurname'] = $this->c->get('randomNameGenerator')->randomSurname($surnames);
+        }
+
+        return $this->data['randomSurname'];
+    }
 }
