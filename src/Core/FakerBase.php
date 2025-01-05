@@ -50,7 +50,7 @@ class FakerBase
     public function uuid(): string
     {
         if (empty($this->data['uuid'])) {
-            $this->data['uuid'] = $this->c->get('uuidGenerator')->generateUuid4();
+            $this->data['uuid'] = $this->c->get('uuidGenerator')->uuid4();
         }
 
         return $this->data['uuid'];
@@ -347,12 +347,13 @@ class FakerBase
      *
      * @return string
      */
-    public function randomName(?string $gender = null, ?int $surnames = 0): string {
-        if (empty($this->data['randomName'])) {
-            $this->data['randomName'] = $this->c->get('randomNameGenerator')->randomName($gender, $surnames);
+    public function name(?string $gender = null, ?int $surnames = 0): string
+    {
+        if (empty($this->data['name'])) {
+            $this->data['name'] = $this->c->get('nameGenerator')->name($gender, $surnames);
         }
 
-        return $this->data['randomName'];
+        return $this->data['name'];
     }
 
     /**
@@ -369,13 +370,13 @@ class FakerBase
      *
      * @return string
      */
-    public function randomMaleName(?int $surnames = 0): string
+    public function maleName(?int $surnames = 0): string
     {
-        if (empty($this->data['randomMaleName'])) {
-            $this->data['randomMaleName'] = $this->c->get('randomNameGenerator')->randomMaleName($surnames);
+        if (empty($this->data['maleName'])) {
+            $this->data['maleName'] = $this->c->get('nameGenerator')->maleName($surnames);
         }
 
-        return $this->data['randomMaleName'];
+        return $this->data['maleName'];
     }
 
     /**
@@ -392,13 +393,13 @@ class FakerBase
      *
      * @return string
      */
-    public function randomFemaleName(?int $surnames = 0): string
+    public function femaleName(?int $surnames = 0): string
     {
-        if (empty($this->data['randomFemaleName'])) {
-            $this->data['randomFemaleName'] = $this->c->get('randomNameGenerator')->randomFemaleName($surnames);
+        if (empty($this->data['femaleName'])) {
+            $this->data['femaleName'] = $this->c->get('nameGenerator')->femaleName($surnames);
         }
 
-        return $this->data['randomFemaleName'];
+        return $this->data['femaleName'];
     }
 
     /**
@@ -415,16 +416,12 @@ class FakerBase
      *
      * @return string
      */
-    public function randomSurname(?int $surnames = 1): string
+    public function surname(?int $surnames = 1): string
     {
-        if ($surnames < 1) {
-            throw new \InvalidArgumentException('The number of surnames must be greater than 0.');
+        if (empty($this->data['surname'])) {
+            $this->data['surname'] = $this->c->get('nameGenerator')->surname($surnames);
         }
 
-        if (empty($this->data['randomSurname'])) {
-            $this->data['randomSurname'] = $this->c->get('randomNameGenerator')->randomSurname($surnames);
-        }
-
-        return $this->data['randomSurname'];
+        return $this->data['surname'];
     }
 }

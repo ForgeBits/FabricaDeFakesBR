@@ -4,5 +4,5 @@ namespace ForgeBits\FabricaDeFakes\Generators\UUID;
 
 interface UUIDGeneratorInterface
 {
-    public function generateUuid4(): string;
+    public function uuid4(): string;
 }

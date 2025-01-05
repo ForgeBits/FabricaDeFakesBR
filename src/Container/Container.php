@@ -28,7 +28,7 @@ class Container implements ContainerInterface
      * @throws NotFoundExceptionInterface
      * @throws Exception
      */
-    public function get(string $id)
+    public function get(string $id): mixed
     {
         if (!$this->has($id)) {
             throw new Exception("Service not found: $id");

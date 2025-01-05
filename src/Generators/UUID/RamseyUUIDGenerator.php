@@ -19,7 +19,7 @@ class RamseyUUIDGenerator implements UUIDGeneratorInterface
      *
      * @return string O UUID gerado ou previamente armazenado.
      */
-    public function generateUuid4(): string
+    public function uuid4(): string
     {
         return Uuid::uuid4()->toString();
     }

@@ -10,6 +10,7 @@ $fakerPack->uuid();
 dd($fakerPack);*/
 
 $faker = new FakerBase();
+
 $faker->uuid();
 $faker->date();
 
@@ -26,9 +27,9 @@ $faker->randomManyIntegerNumbers(20, 1, 10);
 $faker->randomManyIntegerNumbersExcept([1,2,3,4,5], 20, 1, 10);
 $faker->randomManyFloatNumbers(20, 1.0, 10.0);
 
-$faker->randomName(gender: 'female', surnames: 5);
-$faker->randomMaleName();
-$faker->randomFemaleName();
-$faker->randomSurname(2);
+$faker->name(gender: 'female', surnames: 5);
+$faker->maleName();
+$faker->femaleName();
+$faker->surname(2);
 
 dump($faker);

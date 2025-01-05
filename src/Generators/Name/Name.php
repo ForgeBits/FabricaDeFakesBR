@@ -1,11 +1,11 @@
 <?php
 
-namespace ForgeBits\FabricaDeFakes\Generators\Names;
+namespace ForgeBits\FabricaDeFakes\Generators\Name;
 
-use ForgeBits\FabricaDeFakes\Core\Name;
+use ForgeBits\FabricaDeFakes\Core\Name as NameCore;
 use ForgeBits\FabricaDeFakes\Resources\Name as NameResource;
 
-class RandomName implements RandomNameInterface
+class Name implements NameInterface
 {
     /**
      * Gera um nome aleatorio podendo ser passado o genero e a quantidade de sobrenomes
@@ -20,10 +20,10 @@ class RandomName implements RandomNameInterface
      *
      * @return string
      */
-    public function randomName(?string $gender = null, ?int $surnames = 0): string
+    public function name(?string $gender = null, ?int $surnames = 0): string
     {
         $name = NameResource::getName($gender);
-        $nameInstance = new Name($name);
+        $nameInstance = new NameCore($name);
 
         if ($surnames > 0) {
             $surname = NameResource::getSurname($surnames);
@@ -45,9 +45,9 @@ class RandomName implements RandomNameInterface
      *
      * @return string
      */
-    public function randomMaleName(?int $surnames = 0): string
+    public function maleName(?int $surnames = 0): string
     {
-        return $this->randomName('male', $surnames);
+        return $this->name('male', $surnames);
     }
 
     /**
@@ -62,9 +62,9 @@ class RandomName implements RandomNameInterface
      *
      * @return string
      */
-    public function randomFemaleName(?int $surnames = 0): string
+    public function femaleName(?int $surnames = 0): string
     {
-        return $this->randomName('female', $surnames);
+        return $this->name('female', $surnames);
     }
 
     /**
@@ -79,7 +79,7 @@ class RandomName implements RandomNameInterface
      *
      * @return string
      */
-    public function randomSurname(?int $surnames = 1): string
+    public function surname(?int $surnames = 1): string
     {
         if ($surnames < 1) {
             throw new \InvalidArgumentException('The number of surnames must be greater than 0.');

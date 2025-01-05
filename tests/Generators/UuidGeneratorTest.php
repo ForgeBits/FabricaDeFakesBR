@@ -20,7 +20,7 @@ class UuidGeneratorTest extends TestCase
 
         /** @var UUIDGeneratorInterface $service */
         $service = $c->get('uuidGenerator');
-        $uuid = $service->generateUuid4();
+        $uuid = $service->uuid4();
 
         $this->assertIsString($uuid);
         $this->assertTrue(Uuid::isValid($uuid));
