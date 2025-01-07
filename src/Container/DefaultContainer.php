@@ -4,6 +4,7 @@ namespace ForgeBits\FabricaDeFakes\Container;
 
 use ForgeBits\FabricaDeFakes\Generators\Date\CarbonDate;
 use ForgeBits\FabricaDeFakes\Generators\Date\DateGeneratorInterface;
+use ForgeBits\FabricaDeFakes\Generators\Name\HandleName;
 use ForgeBits\FabricaDeFakes\Generators\Name\Name;
 use ForgeBits\FabricaDeFakes\Generators\Name\NameInterface;
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomManyNumbers\RandomManyNumbers;
@@ -39,7 +40,7 @@ class DefaultContainer
                 return new RandomLetter();
         }, RandomLetterInterface::class)
             ->set('nameGenerator', function () use ($container) {
-                return new Name();
+                return new Name(new HandleName());
         }, NameInterface::class);
     }
 }

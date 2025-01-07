@@ -3,10 +3,16 @@
 namespace ForgeBits\FabricaDeFakes\Generators\Name;
 
 use ForgeBits\FabricaDeFakes\Core\Name as NameCore;
-use ForgeBits\FabricaDeFakes\Resources\Name as NameResource;
 
 class Name implements NameInterface
 {
+    private HandleName $resource;
+
+    public function __construct(HandleName $resource)
+    {
+        $this->resource = $resource;
+    }
+
     /**
      * Gera um nome aleatorio podendo ser passado o genero e a quantidade de sobrenomes
      *
@@ -22,11 +28,11 @@ class Name implements NameInterface
      */
     public function name(?string $gender = null, ?int $surnames = 0): string
     {
-        $name = NameResource::getName($gender);
+        $name = $this->resource->getName($gender);
         $nameInstance = new NameCore($name);
 
         if ($surnames > 0) {
-            $surname = NameResource::getSurname($surnames);
+            $surname = $this->resource->getSurname($surnames);
             $nameInstance->setSurname($surname);
         }
 
@@ -85,6 +91,6 @@ class Name implements NameInterface
             throw new \InvalidArgumentException('The number of surnames must be greater than 0.');
         }
 
-        return NameResource::getSurname($surnames);
+        return $this->resource->getSurname($surnames);
     }
 }
