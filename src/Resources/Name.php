@@ -4,26 +4,6 @@ namespace ForgeBits\FabricaDeFakes\Resources;
 
 class Name
 {
-    public static function getName(?string $gender = null): string
-    {
-        return match ($gender) {
-            'female' => self::getFemaleNames()[array_rand(self::getFemaleNames())],
-            'male' => self::getMaleNames()[array_rand(self::getMaleNames())],
-            default => self::mergeMalesAndFemalesNames()[array_rand(self::mergeMalesAndFemalesNames())],
-        };
-    }
-
-    public static function getSurname(?int $surnames = 0): string
-    {
-        $surname = [];
-
-        for ($i = 0; $i < $surnames; $i++) {
-            $surname[] = self::getSurnames()[array_rand(self::getSurnames())];
-        }
-
-        return implode(' ', $surname);
-    }
-
     public static function mergeMalesAndFemalesNames(): array
     {
         return array_merge(self::getMaleNames(), self::getFemaleNames());
