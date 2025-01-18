@@ -32,4 +32,9 @@ $faker->maleName();
 $faker->femaleName();
 $faker->surname(2);
 
+$faker->email();
+$faker->emailWithoutDomain();
+$faker->tld();
+$faker->domain();
+
 dump($faker);

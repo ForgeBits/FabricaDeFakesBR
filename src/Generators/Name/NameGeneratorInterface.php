@@ -2,7 +2,7 @@
 
 namespace ForgeBits\FabricaDeFakes\Generators\Name;
 
-interface NameInterface
+interface NameGeneratorInterface
 {
     public function name(?string $gender = null, ?int $surnames = 2): string;
     public function maleName(?int $surnames = 0): string;

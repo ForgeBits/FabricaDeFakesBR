@@ -424,4 +424,94 @@ class FakerBase
 
         return $this->data['surname'];
     }
+
+    /**
+     * Gera um email aleatorio
+     *
+     * Este metodo verifica o email já foi gerado anteriormente. Caso contrário, um novo email é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $email = $faker->email();
+     * </code>
+     *
+     * @param string|null $username
+     * @param string|null $domain
+     * @param string|null $tld
+     *
+     * @return string
+     */
+    public function email(?string $username = null, ?string $domain = null, ?string $tld = null): string
+    {
+        if (empty($this->data['email'])) {
+            $this->data['email'] = $this->c->get('emailGenerator')->email($username, $domain, $tld);
+        }
+
+        return $this->data['email'];
+    }
+
+    /**
+     * Gera um email aleatorio sem o dominio
+     *
+     * Este metodo verifica o email sem o domínio já foi gerado anteriormente. Caso contrário, um novo email é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $emailWithoutDomain = $faker->emailWithoutDomain();
+     * </code>
+     *
+     * @param string|null $username
+     *
+     * @return string
+     */
+    public function emailWithoutDomain(?string $username = null): string
+    {
+        if (empty($this->data['emailWithoutDomain'])) {
+            $this->data['emailWithoutDomain'] = $this->c->get('emailGenerator')->emailWithoutDomain($username);
+        }
+
+        return $this->data['emailWithoutDomain'];
+    }
+
+    /**
+     * Gera um tld aleatorio sem o dominio e o tld
+     *
+     * Este metodo verifica se o tld já foi gerado anteriormente. Caso contrário, um novo tld é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $emailWithoutDomainAndTld = $faker->tld();
+     * </code>
+     *
+     * @return string
+     */
+    public function tld(): string
+    {
+        if (empty($this->data['tld'])) {
+            $this->data['tld'] = $this->c->get('emailGenerator')->tld();
+        }
+
+        return $this->data['tld'];
+    }
+
+    /**
+     * Gera um dominio aleatorio.
+     *
+     * Este metodo verifica se o domínio já foi gerado anteriormente. Caso contrário, um novo domínio é gerado.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $emailWithoutDomainAndTld = $faker->domain();
+     * </code>
+     *
+     * @return string
+     */
+    public function domain(): string
+    {
+        if (empty($this->data['domain'])) {
+            $this->data['domain'] = $this->c->get('emailGenerator')->domain();
+        }
+
+        return $this->data['domain'];
+    }
 }

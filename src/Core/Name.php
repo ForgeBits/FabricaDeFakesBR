@@ -18,7 +18,7 @@ class Name
     public function setSurname(array|string $surname): self
     {
         if (empty($this->name)) {
-            throw new \DomainException('Name is required to set surname');
+            throw new \DomainException('NameGenerator is required to set surname');
         }
 
         if (empty($surname)) {

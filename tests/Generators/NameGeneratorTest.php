@@ -3,14 +3,14 @@
 namespace ForgeBits\FabricaDeFakes\Tests\Generators;
 
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
-use ForgeBits\FabricaDeFakes\Generators\Name\NameInterface;
+use ForgeBits\FabricaDeFakes\Generators\Name\NameGeneratorInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 class NameGeneratorTest extends TestCase
 {
-    private NameInterface $generator;
+    private NameGeneratorInterface $generator;
 
     /**
      * @throws NotFoundExceptionInterface|ContainerExceptionInterface

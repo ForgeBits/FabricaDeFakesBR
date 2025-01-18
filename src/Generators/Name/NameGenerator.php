@@ -4,7 +4,7 @@ namespace ForgeBits\FabricaDeFakes\Generators\Name;
 
 use ForgeBits\FabricaDeFakes\Core\Name as NameCore;
 
-class Name implements NameInterface
+class NameGenerator implements NameGeneratorInterface
 {
     private HandleName $resource;
 

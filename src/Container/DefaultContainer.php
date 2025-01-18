@@ -4,9 +4,11 @@ namespace ForgeBits\FabricaDeFakes\Container;
 
 use ForgeBits\FabricaDeFakes\Generators\Date\CarbonDate;
 use ForgeBits\FabricaDeFakes\Generators\Date\DateGeneratorInterface;
+use ForgeBits\FabricaDeFakes\Generators\Email\EmailGenerator;
+use ForgeBits\FabricaDeFakes\Generators\Email\EmailGeneratorInterface;
 use ForgeBits\FabricaDeFakes\Generators\Name\HandleName;
-use ForgeBits\FabricaDeFakes\Generators\Name\Name;
-use ForgeBits\FabricaDeFakes\Generators\Name\NameInterface;
+use ForgeBits\FabricaDeFakes\Generators\Name\NameGenerator;
+use ForgeBits\FabricaDeFakes\Generators\Name\NameGeneratorInterface;
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomManyNumbers\RandomManyNumbers;
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomManyNumbers\RandomManyNumbersInterface;
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomNumbers\RandomNumber;
@@ -40,7 +42,10 @@ class DefaultContainer
                 return new RandomLetter();
         }, RandomLetterInterface::class)
             ->set('nameGenerator', function () use ($container) {
-                return new Name(new HandleName());
-        }, NameInterface::class);
+                return new NameGenerator(new HandleName());
+        }, NameGeneratorInterface::class)
+            ->set('emailGenerator', function () use ($container) {
+                return new EmailGenerator();
+        }, EmailGeneratorInterface::class);
     }
 }
