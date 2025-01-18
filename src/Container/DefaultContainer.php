@@ -13,6 +13,8 @@ use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomManyNumbers\RandomManyNumb
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomManyNumbers\RandomManyNumbersInterface;
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomNumbers\RandomNumber;
 use ForgeBits\FabricaDeFakes\Generators\Numbers\RandomNumbers\RandomNumberInterface;
+use ForgeBits\FabricaDeFakes\Generators\Password\PasswordGenerator;
+use ForgeBits\FabricaDeFakes\Generators\Password\PasswordGeneratorInterface;
 use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\RandomLetter;
 use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\RandomLetterInterface;
 use ForgeBits\FabricaDeFakes\Generators\UUID\RamseyUuidGenerator;
@@ -46,6 +48,9 @@ class DefaultContainer
         }, NameGeneratorInterface::class)
             ->set('emailGenerator', function () use ($container) {
                 return new EmailGenerator();
-        }, EmailGeneratorInterface::class);
+        }, EmailGeneratorInterface::class)
+            ->set('passwordGenerator', function () use ($container) {
+            return new PasswordGenerator();
+        }, PasswordGeneratorInterface::class);
     }
 }

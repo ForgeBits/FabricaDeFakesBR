@@ -4,7 +4,9 @@ namespace ForgeBits\FabricaDeFakes\Core;
 
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
 use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\Formatters\FormatterLetterInterface;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 class FakerBase
 {
@@ -513,5 +515,48 @@ class FakerBase
         }
 
         return $this->data['domain'];
+    }
+
+    /**
+     * Gera uma senha aleatória.
+     *
+     * Este metodo verifica se a senha já foi gerada anteriormente. Caso contrário, uma nova senha é gerada.
+     *
+     * <code>
+     *     $faker = new FakerBase();
+     *     $password = $faker->password(16, true, false, true, false, PASSWORD_BCRYPT, ['cost' => 12]);
+     * </code>
+     *
+     * @param int $length Tamanho da senha.
+     * @param bool|null $upperCase Indica se a senha deve conter letras maiúsculas.
+     * @param bool|null $lowerCase Indica se a senha deve conter letras minúsculas.
+     * @param bool|null $numbers Indica se a senha deve conter números.
+     * @param bool|null $specialCaracteres Indica se a senha deve conter caracteres especiais.
+     * @param string|null $encrypt Algoritmo de criptografia da senha.
+     * @param array|null $options Opções para o algoritmo de criptografia.
+     *
+     * @return string A senha gerada ou previamente armazenada.
+     */
+    public function password(
+        int $length = 8,
+        ?bool $upperCase = true,
+        ?bool $lowerCase = true,
+        ?bool $numbers = true,
+        ?bool $specialCaracteres = true,
+        ?string $passwordHash = null,
+        ?array $options = []
+    ): string {
+        if (empty($this->data['password'])) {
+            $this->data['password'] = $this->c->get('passwordGenerator')->password(
+                $length,
+                $upperCase,
+                $lowerCase,
+                $numbers,
+                $specialCaracteres,
+                $passwordHash,
+                $options,
+            );
+        }
+        return $this->data['password'];
     }
 }
