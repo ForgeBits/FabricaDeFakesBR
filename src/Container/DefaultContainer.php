@@ -2,6 +2,8 @@
 
 namespace ForgeBits\FabricaDeFakes\Container;
 
+use ForgeBits\FabricaDeFakes\Generators\Colors\ColorGenerator;
+use ForgeBits\FabricaDeFakes\Generators\Colors\ColorGeneratorInterface;
 use ForgeBits\FabricaDeFakes\Generators\Date\CarbonDate;
 use ForgeBits\FabricaDeFakes\Generators\Date\DateGeneratorInterface;
 use ForgeBits\FabricaDeFakes\Generators\Email\EmailGenerator;
@@ -51,6 +53,8 @@ class DefaultContainer
         }, EmailGeneratorInterface::class)
             ->set('passwordGenerator', function () use ($container) {
             return new PasswordGenerator();
-        }, PasswordGeneratorInterface::class);
-    }
+        }, PasswordGeneratorInterface::class)
+            ->set('colorGenerator', function () use ($container) {
+                return new ColorGenerator();
+        }, ColorGeneratorInterface::class); }
 }

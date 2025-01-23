@@ -39,4 +39,6 @@ $faker->domain();
 
 $faker->password(16, true, false, true, false, PASSWORD_BCRYPT, ['cost' => 12]);
 
+$faker->hexadecimalColor();
+
 dump($faker);

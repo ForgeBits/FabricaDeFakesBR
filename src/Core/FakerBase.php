@@ -4,9 +4,7 @@ namespace ForgeBits\FabricaDeFakes\Core;
 
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
 use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\Formatters\FormatterLetterInterface;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 class FakerBase
 {
@@ -558,5 +556,14 @@ class FakerBase
             );
         }
         return $this->data['password'];
+    }
+
+    public function hexadecimalColor(): string
+    {
+        if (empty($this->data['hexadecimalColor'])) {
+            $this->data['hexadecimalColor'] = $this->c->get('colorGenerator')->hexadecimalColor();
+        }
+
+        return $this->data['hexadecimalColor'];
     }
 }
