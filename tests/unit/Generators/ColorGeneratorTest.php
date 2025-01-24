@@ -1,26 +1,18 @@
 <?php
 
-namespace ForgeBits\FabricaDeFakes\Tests\Generators;
+namespace ForgeBits\FabricaDeFakes\Tests\Unit\Generators;
 
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
 use ForgeBits\FabricaDeFakes\Generators\Colors\ColorGeneratorInterface;
-use ForgeBits\FabricaDeFakes\Generators\Email\EmailGeneratorInterface;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 class ColorGeneratorTest extends TestCase
 {
     private ColorGeneratorInterface $generator;
 
-    /**
-     * @throws NotFoundExceptionInterface|ContainerExceptionInterface
-     */
-    public function __construct(string $name)
+    public function setUp(): void
     {
         $this->generator = DefaultContainer::createContainer()->get('colorGenerator');
-
-        parent::__construct($name);
     }
 
     public function testGenerateColor()

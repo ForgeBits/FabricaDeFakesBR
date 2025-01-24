@@ -1,25 +1,18 @@
 <?php
 
-namespace ForgeBits\FabricaDeFakes\Tests\Generators;
+namespace ForgeBits\FabricaDeFakes\Tests\Unit\Generators;
 
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
 use ForgeBits\FabricaDeFakes\Generators\Password\PasswordGeneratorInterface;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerExceptionInterface;
-use Psr\Container\NotFoundExceptionInterface;
 
 class PasswordGeneratorTest extends TestCase
 {
     private PasswordGeneratorInterface $generator;
 
-    /**
-     * @throws NotFoundExceptionInterface|ContainerExceptionInterface
-     */
-    public function __construct(string $name)
+    public function setUp(): void
     {
         $this->generator = DefaultContainer::createContainer()->get('passwordGenerator');
-
-        parent::__construct($name);
     }
 
     public function testGenerateSimplePassword()

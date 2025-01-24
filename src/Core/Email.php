@@ -38,6 +38,21 @@ class Email
         return $this;
     }
 
+    public function getUsername(): string
+    {
+        return $this->username;
+    }
+
+    public function getDomain(): string
+    {
+        return $this->domain;
+    }
+
+    public function getTld(): string
+    {
+        return $this->tld;
+    }
+
     public function __toString(): string
     {
         return $this->username . rand(10, 99) . '@' . $this->domain . '.' . $this->tld;

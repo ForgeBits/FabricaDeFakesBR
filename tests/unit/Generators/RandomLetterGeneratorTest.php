@@ -1,6 +1,6 @@
 <?php
 
-namespace ForgeBits\FabricaDeFakes\Tests\Generators;
+namespace ForgeBits\FabricaDeFakes\Tests\Unit\Generators;
 
 use ForgeBits\FabricaDeFakes\Container\DefaultContainer;
 use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\Formatters\ArrayFormatter;
@@ -9,21 +9,15 @@ use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\Formatters\PipeFormatter
 use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\Formatters\SlashFormatter;
 use ForgeBits\FabricaDeFakes\Generators\Strings\Letters\RandomLetterInterface;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 
 class RandomLetterGeneratorTest extends TestCase
 {
     private RandomLetterInterface $generator;
 
-    /**
-     * @throws NotFoundExceptionInterface|ContainerExceptionInterface
-     */
-    public function __construct(string $name)
+    public function setUp(): void
     {
         $this->generator = DefaultContainer::createContainer()->get('randomLetterGenerator');
-
-        parent::__construct($name);
     }
 
     /**
